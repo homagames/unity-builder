@@ -50,6 +50,7 @@ class ImageEnvironmentFactory {
       { name: 'ANDROID_SYMBOL_TYPE', value: parameters.androidSymbolType },
       { name: 'CUSTOM_PARAMETERS', value: parameters.customParameters },
       { name: 'CHOWN_FILES_TO', value: parameters.chownFilesTo },
+      { name: 'SHOULD_QUIT', value: parameters.shouldQuit },
       { name: 'GITHUB_REF', value: process.env.GITHUB_REF },
       { name: 'GITHUB_SHA', value: process.env.GITHUB_SHA },
       { name: 'GITHUB_REPOSITORY', value: process.env.GITHUB_REPOSITORY },

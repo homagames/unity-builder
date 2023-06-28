@@ -216,6 +216,12 @@ class Input {
     return Input.getInput('dockerWorkspacePath') || '/github/workspace';
   }
 
+  static get shouldQuit(): boolean {
+    const input = Input.getInput('quit') || true;
+
+    return input === 'true';
+  }
+
   public static ToEnvVarFormat(input: string) {
     if (input.toUpperCase() === input) {
       return input;

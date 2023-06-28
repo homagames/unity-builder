@@ -85,6 +85,13 @@ else
   echo "Not updating Android SDK."
 fi
 
+
+if [[ "$SHOULD_QUIT" == "true" ]]; then
+  QUIT_ARGUMENT="-quit"
+else
+  QUIT_ARGUMENT=""
+fi
+
 #
 # Pre-build debug information
 #
@@ -129,7 +136,7 @@ echo ""
 
 /Applications/Unity/Hub/Editor/$UNITY_VERSION/Unity.app/Contents/MacOS/Unity \
   -logFile - \
-  -quit \
+  $QUIT_ARGUMENT \
   -batchmode \
   -nographics \
   -username "$UNITY_EMAIL" \

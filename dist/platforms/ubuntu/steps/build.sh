@@ -75,6 +75,12 @@ else
   echo "Not updating Android SDK."
 fi
 
+if [[ "$SHOULD_QUIT" == "true" ]]; then
+  QUIT_ARGUMENT="-quit"
+else
+  QUIT_ARGUMENT=""
+fi
+
 #
 # Pre-build debug information
 #
@@ -119,7 +125,7 @@ echo ""
 
 unity-editor \
   -logfile /dev/stdout \
-  -quit \
+  $QUIT_ARGUMENT \
   -customBuildName "$BUILD_NAME" \
   -projectPath "$UNITY_PROJECT_PATH" \
   -buildTarget "$BUILD_TARGET" \

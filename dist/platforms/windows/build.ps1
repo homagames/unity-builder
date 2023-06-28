@@ -66,6 +66,15 @@ else
     Get-ChildItem -Path $Env:UNITY_PROJECT_PATH\Assets\Editor -Recurse
 }
 
+if ($Env:SHOULD_QUIT)
+{
+    $Env:QUIT_ARGUMENT="-quit"
+}
+else
+{
+    $Env:QUIT_ARGUMENT=""
+}
+
 #
 # Pre-build debug information
 #
@@ -113,7 +122,7 @@ Write-Output ""
 # in double quotes.  To avoid this, parse $Env:CUSTOM_PARAMETERS into an array, while respecting any quotations within the string.
 $_, $customParametersArray = Invoke-Expression('Write-Output -- "" ' + $Env:CUSTOM_PARAMETERS)
 
-& "C:\Program Files\Unity\Hub\Editor\$Env:UNITY_VERSION\Editor\Unity.exe" -quit -batchmode -nographics `
+& "C:\Program Files\Unity\Hub\Editor\$Env:UNITY_VERSION\Editor\Unity.exe" $Env:QUIT_ARGUMENT -batchmode -nographics `
                                                                           -projectPath $Env:UNITY_PROJECT_PATH `
                                                                           -executeMethod $Env:BUILD_METHOD `
                                                                           -buildTarget $Env:BUILD_TARGET `
