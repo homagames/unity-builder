@@ -66,7 +66,7 @@ else
     Get-ChildItem -Path $Env:UNITY_PROJECT_PATH\Assets\Editor -Recurse
 }
 
-if ($Env:SHOULD_QUIT)
+if ($Env:SHOULD_QUIT == "true")
 {
     $Env:QUIT_ARGUMENT="-quit"
 }
