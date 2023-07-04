@@ -213,7 +213,7 @@ inputs:
     description:
       'The path to mount the workspace inside the docker container. For windows, leave out the drive letter. For example
       c:/github/workspace should be defined as /github/workspace'
-  quit:
+  shouldQuit:
     description: 'Should the -quit command line argument be used when running Unity'
     default: 'true'
     required: false

@@ -217,7 +217,7 @@ class Input {
   }
 
   static get shouldQuit(): boolean {
-    const input = Input.getInput('quit') || true;
+    const input = Input.getInput('shouldQuit') || true;
 
     return input === 'true';
   }
