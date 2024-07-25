@@ -1,11 +1,20 @@
-import { exec } from '@actions/exec';
+import { getExecOutput } from '@actions/exec';
+import fs from 'node:fs/promises';
 
 class MacBuilder {
   public static async run(actionFolder: string, silent: boolean = false): Promise<number> {
-    return await exec('bash', [`${actionFolder}/platforms/mac/entrypoint.sh`], {
+    const result = await getExecOutput('bash', [`${actionFolder}/platforms/mac/entrypoint.sh`], {
       silent,
-      ignoreReturnCode: true,
     });
+
+    if (result.stdout) {
+      try {
+        await fs.writeFile('mac-build-logs.log', result.stdout);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    return result.exitCode;
   }
 }
 
