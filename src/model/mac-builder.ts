@@ -9,7 +9,7 @@ class MacBuilder {
 
     if (result.stdout) {
       try {
-        await fs.writeFile('mac-build-logs.log', result.stdout);
+        await fs.writeFile('unity-execution-logs.log', result.stdout);
       } catch (err) {
         console.log(err);
       }
