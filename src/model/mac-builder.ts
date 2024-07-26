@@ -5,12 +5,12 @@ class MacBuilder {
   public static async run(actionFolder: string, silent: boolean = false): Promise<number> {
     const options = {
       listeners: {
-          stdout: (data: Buffer) => {
-            fs.writeFile('unity-execution-logs.log', data.toString(), { flag: 'a' });
-          }
+        stdout: (data: Buffer) => {
+          fs.writeFile('unity-execution-logs.log', data.toString(), { flag: 'a' });
+        },
       },
-      silent
-  };
+      silent,
+    };
     return await exec('bash', [`${actionFolder}/platforms/mac/entrypoint.sh`], options);
   }
 }

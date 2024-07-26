@@ -1,7 +1,7 @@
 import ImageEnvironmentFactory from './image-environment-factory';
 import { existsSync, mkdirSync, writeFile } from 'node:fs';
 import path from 'node:path';
-import { ExecOptions, getExecOutput } from '@actions/exec';
+import { ExecOptions, exec } from '@actions/exec';
 import { DockerParameters, StringKeyValuePair } from './shared-types';
 
 class Docker {
@@ -28,25 +28,13 @@ class Docker {
 
     options.silent = silent;
     options.ignoreReturnCode = true;
+    options.listeners = {
+      stdout: (data: Buffer) => {
+        writeFile('unity-execution-logs.log', data.toString(), { flag: 'a' }, () => {});
+      },
+    };
 
-    const result = await getExecOutput(runCommand, undefined, options);
-
-    if (result.stdout) {
-      writeFile('unity-execution-logs.log', result.stdout, (error) => {
-        if (error) {
-          console.log(error);
-        }
-      });
-    }
-    if (result.stderr) {
-      writeFile('unity-execution-logs.log', result.stderr, (error) => {
-        if (error) {
-          console.log(error);
-        }
-      });
-    }
-
-    return result.exitCode;
+    return await exec(runCommand, undefined, options);
   }
 
   static getLinuxCommand(
