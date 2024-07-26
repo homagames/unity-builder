@@ -10,6 +10,7 @@ class MacBuilder {
         },
       },
       silent,
+      ignoreReturnCode: true,
     };
     return await exec('bash', [`${actionFolder}/platforms/mac/entrypoint.sh`], options);
   }
