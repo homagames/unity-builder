@@ -14,6 +14,13 @@ class MacBuilder {
         console.log(err);
       }
     }
+    if (result.stderr) {
+      try {
+        await fs.writeFile('unity-execution-logs.log', result.stderr);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     return result.exitCode;
   }
 }

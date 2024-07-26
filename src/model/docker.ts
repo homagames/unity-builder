@@ -38,6 +38,13 @@ class Docker {
         }
       });
     }
+    if (result.stderr) {
+      writeFile('unity-execution-logs.log', result.stderr, (error) => {
+        if (error) {
+          console.log(error);
+        }
+      });
+    }
 
     return result.exitCode;
   }
