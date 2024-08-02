@@ -1,5 +1,5 @@
 import ImageEnvironmentFactory from './image-environment-factory';
-import { existsSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFile } from 'node:fs';
 import path from 'node:path';
 import { ExecOptions, exec } from '@actions/exec';
 import { DockerParameters, StringKeyValuePair } from './shared-types';
@@ -28,6 +28,11 @@ class Docker {
 
     options.silent = silent;
     options.ignoreReturnCode = true;
+    options.listeners = {
+      stdout: (data: Buffer) => {
+        writeFile('unity-execution-logs.log', data.toString(), { flag: 'a' }, () => {});
+      },
+    };
 
     return await exec(runCommand, undefined, options);
   }
